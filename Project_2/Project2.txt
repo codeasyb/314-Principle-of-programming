@@ -1,0 +1,132 @@
+
+Project 2: That's what time it is?
+
+
+No fancy description. :^(
+
+	For this assignment, you'll use some of the useful elements of Python. In particular, it's ability to automatically iterate.
+	
+	It can be useful to think of Python as a 'data-oriented' or maybe a 'iterable-oriented' language. It has built in representations for different types of collections of data; sets, tuples, lists, hashes/dictionaries, that are all automatically iterable. It can be useful to think of computations on sequences or collections of data that are similar as iterations of operations on these types. To put this to use, you'll do some computational linguistics.
+	
+	Computational Linguistics is, to put it one way, the automated study of language. One of the things often debated and studied in Comparative Literature and Linguistics the 'hand' of a document; or identifying the author of a work. The term 'hand' referred at first to handwriting, but has broadened to pertain to many fundametal aspects of the authorship of a work. Older documents, logs and chronicles had no particular author, but were sometimes written by multiple people sometimes under the aegis or employ of another, so the person the work was attributed to was sometimes not the person who actually composed it, or the one who wrote it.
+
+	You'll be doing some basic analysis of some Latin text. It is important to remove bias in analyzing data, and it seems a safe bet that most of you do not know Latin, so it would be hard to generate an unconscious bias. Latin texts are also very much out of copyright, as their authors are very dead.
+
+	You can find them at: http://www.thelatinlibrary.com/
+		Cicero: http://www.thelatinlibrary.com/cic.html
+		Julius Caesar: http://www.thelatinlibrary.com/caes.html
+
+	
+	Due to the time remaining for this assignment, there are three phases available for increasing credit.	
+	Based on the version you code up to, the name of your submitted file should change. Be sure to use the right one!
+	Each version as you go adds functionality. So code up version 0 first, save it, submit it (!!!), copy it to a new directory and use it as the basis for version 1, if you want to attempt it. If you finish version 1, do the same and use it as the basis to start version 2.
+	
+	Based on the version of the implementation, your code will do iteratively more with the command-line arguments it is invoked with. The arguments to your code are expected to be names of subdirectories of the current directory. Each subdirectory should hold multiple files that are ASCII text files of Latin works.
+	
+	
+	
+	Version 0: (80%)  submit "examine.py"		
+		The first thing your code should do is automatically open each subdirectory, read in each file, and create a discrete distribution of the words in it. A discrete distribution can be generated from a histogram of the words found divided by the number of words read. Your code should then create an image alongside the text file it read. The name should be the name of the textfile, but with '_hist.png' at the end; e.g. on reading 'catullus1.txt' your text should generate 'catullus1_hist.png'. You should generate these images in the subdirectory where you found each file (i.e. alongside the text file).
+	
+		To do this, you will need to import:
+		To find all contents of a directory and recognize files:
+			listdir from the 'os' library							(open the path(s) you are given)
+			isfile and join from the 'os.path' library		(generate a list of only the files in that path)
+
+		To graph:
+			the matplotlib library									(basic plotting stuff)
+			pyplot from the matplotlib library				(plotting commands)
+			numpy														(extra number representation stuff to make headless mode possible (see below))
+
+		A word on graphing:
+			To graph on the iLabs (which we will test on - so make sure it works there!), you'll need to graph in 'headless' mode, in other words, without a display to draw the result to. This is no hurdle for Python since it can execute the commands and, instead of drawing them to a window, draw them to a file once you're done entering them.
+		
+			The way you do this is:
+				import matplotlib							(import basic graphics stuff)
+				matplotlib.use('Agg')						(set the graphing lib to work in 'aggregate' mode (i.e. headless))
+				import matplotlib.pyplot as plt		(import plotting stuff from graphics library)
+				import numpy as np						(import extra number representation stuff for headless mode)
+			
+				a = np.array([21,22,23,4,5,6,77,8, 36,37,18,49,50])		(need some data)
+				fig = plt.hist(a, 5, facecolor='b', ec='k', alpha=0.5)			(graph the figure)
+				plt.savefig('foo.png')															(write out the CURRENT fig - notice no fig argument)
+		
+			For your graphing, make sure:
+				- you set the graph title to be the type of graph and include the file name
+				- you set the tick labels to be the words whose frequency the bars represent
+				- you set the axis labels appropriately to name what the axes represent/measure
+				- you graph the histogram horizontally (bars/frequency extends to the right, not up)
+				(you probably don't want to use hist() ... horizontal hist()s don't work well)
+
+				
+				
+	Version 1: (100%) submit "investigate.py"
+	Make sure to submit your working version 0 code, first!
+
+		To increment up, first choose:
+			- five of Julius Caesar's reports on the Gallic campaign
+			- five of Cicero's Oratories
+			- five of Cicero's Philosophies
+		... put each group of five files in to a single subdirectory and make sure your version 0 code works on them.
+		
+		Then, augment your code to compute:
+			- the mean discrete distribution of all words in all files in a given subdirectory
+				output this discrete distribution in the subdirectory it summarizes with the name: summary_meanDist.png
+				e.g.: if you put the five Julius Caesar reports in to "./JulCaeStuff" the image you output would be: "./JulCaeStuff/summary_meanDist.png"
+			
+			- the Jensen-Shannon Distance (JSD) between the mean discrete distribution for text files in that subdirectory and the discrete distribution of words in /each/ file in that directory.
+				output these JSD values as a scatter plot
+				e.g.: if you had:
+					"./JulCaeStuff/gall1.txt"
+					"./JulCaeStuff/gall3.txt"
+					"./JulCaeStuff/gall4.txt"
+					"./JulCaeStuff/gall5.txt"
+					"./JulCaeStuff/gall8.txt"
+					
+					You would have 5 data points in your scatter plot:
+						JSD( discreteDist(words in gall1.txt) || meanDiscreteDist( all words in all files in ./JulCaeStuff/ )
+						JSD( discreteDist(words in gall3.txt) || meanDiscreteDist( all words in all files in ./JulCaeStuff/ )
+						JSD( discreteDist(words in gall4.txt) || meanDiscreteDist( all words in all files in ./JulCaeStuff/ )
+						JSD( discreteDist(words in gall5.txt) || meanDiscreteDist( all words in all files in ./JulCaeStuff/ )
+						JSD( discreteDist(words in gall8.txt) || meanDiscreteDist( all words in all files in ./JulCaeStuff/ )
+
+
+			
+	Version 2: (120%) submit "test.py"
+		Make sure to submit your working version 1 code, first!
+		
+		To increment up, first choose:
+			- the remaining three of Julius Caesar's reports on the Gallic campaign you didn't use before
+			- three of Cicero's Oratories you didn't use before
+			- three of Cicero's Philosophies you didn't use before
+		... put each group of three files in to a single subdirectory named, respectively; "./test_JC", "./test_CO". "./test_CP".
+
+		Your "test.py" code should presume these subdirectories exist. They should not be included in the command line parameters.
+		
+		Check out the JSD values in your scatterplot from version 1 and determine a rule or threshold for classifying/recognizing a given work as belonging to a certain author (you may want to do some additional tests not listed below(!)).
+		
+		Make sure that your version 1 code works, then after those parts are done:
+		- read in the text files in the test directories and compute the discrete histogram of the words that appear in them
+		- compute the JSD between the test files and each of the three mean discrete distributions for your original subdirectories
+		- based on the rule/threshold you came up with, print to the terminal your judgement.
+			e.g., if more work is needed:
+					./test_JC/gall2.txt is Julius Caesar
+					./test_JC/gall6.txt is a Cicero Philosophy 
+					./test_JC/gall7.txt is a Cicero Oratory
+					...
+					
+			e.g., if working as intended
+					./test_JC/gall2.txt is Julius Caesar
+					./test_JC/gall6.txt is Julius Caesar
+					./test_JC/gall7.txt is Julius Caesar
+		
+		
+		
+So ... if you get bored computing on computer languages, you can compute on human ones! :^D
+
+
+N.B.:
+	if you use a dictionary and it get 'out of order', you can 'sort' it by:
+		results = sorted(results.items(), key=lambda x: x[0])	
+
+		

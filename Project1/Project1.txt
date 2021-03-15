@@ -1,0 +1,61 @@
+
+Grandpaw?
+
+At some point in the 1930s a singing group known for its regular comedic songs on radio put together the following, based on a collection of fairly amusing and ascerbic anecdotes by Mark Twain wherein, at a point, he laid down a series of circumstances by which someone might conceivably become their own grandfather.
+
+You can find the below the the following address:
+	http://gean.wwco.com/grandpa/
+
+"
+Many, many years ago when I was twenty-three
+I was married to a widow who was pretty as could be.
+This widow had a grown-up daughter who had hair of red.
+My father fell in love with her and soon they, too, were wed.
+
+This made my dad my son-in-law and changed my very life
+For my daughter was my mother, 'cause she was my father's wife.
+To complicate the matter, even though it brought me joy
+I soon became the father of a bouncing baby boy.
+
+My little baby then became a brother-in-law to dad
+And so became my uncle, though it made me very sad
+For if he was my uncle, then that also made him brother
+To the widow's grown-up daughter, who, of course, was my step-mother.
+
+My father's wife then had a son who kept them on the run
+And he became my grand-child, 'cause he was my daughter's son.
+My wife is now my mother's mother, and it makes me blue
+Because, although she is my wife, she's my grandmother too.
+
+If my wife is my grandmother, then I am her grandchild
+And every time I think of it, it nearly drives me wild
+For now I have become the strangest case you ever saw
+(This has got to be the strangest thing I ever saw)
+As husband of my grandmother, I am my own grandpaw.
+"
+
+
+The amusing happenstance is caused by regarding relation by marriage and heredity as equivalent.
+
+For the purposes of the assignment, presume all marriages are between individuals of opposite sex and that all relations of both marriage and blood are equivalent; in particular the 'in law' suffix that is usually postpended to relations gained by marriage can be dispensed with. It is used once in the rule below for clarity.
+
+Your assignment is to write a set of Prolog rules to verify the proposition that the relations in the song are indeed possible.
+
+You should start the basic facts:
+male(X).
+female(X).
+child(X,Y).
+spouse(X,Y).
+
+ .. and construct at least the 'prove' rule below and its subgoals to model and test/investigate the logical consistency of the song above:
+ 
+proof(ME) :- daughter(A,ME), mother(A,ME), son_in_law(D,ME), brother(B, D), uncle(E,ME), brother(B,A), grandchild(F,ME), mother(C,A), grandmother(C,ME), grandchild(ME,C), grandfather(ME,ME). 
+
+Be sure the subgoals capture the relationship they name.
+
+Submit your "OwnGrandpa.pl" on or before the due date.
+
+
+
+
+
